@@ -4,8 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import com.nbcamp.mvvm_calculator.base.BaseViewModel
 
 class MainViewModel : BaseViewModel<MainCalculateState>() {
-    override val firstOperand: MutableLiveData<String> = MutableLiveData("")
-    override val secondOperand: MutableLiveData<String> = MutableLiveData("")
+    override val firstOperand: MutableLiveData<String> = MutableLiveData("0")
+    override val secondOperand: MutableLiveData<String> = MutableLiveData("0")
 
     /**
      * @param operator 계산 타입
@@ -32,6 +32,10 @@ class MainViewModel : BaseViewModel<MainCalculateState>() {
                 _calculateState.value = MainCalculateState.GetResult(firstValue * secondValue)
             }
             ButtonType.DIVIDE -> {
+                if(secondValue == 0){
+                    _calculateState.value = MainCalculateState.FailCalculate("0으로 나눌 수 없습니다.")
+                    return
+                }
                 _calculateState.value = MainCalculateState.GetResult(firstValue / secondValue)
             }
         }

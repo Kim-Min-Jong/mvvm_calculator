@@ -8,9 +8,12 @@ import androidx.viewbinding.ViewBinding
 /**
  * BaseActivity로 추상화하여
  * ViewBinding 및 BaseViewModel을 처리합니다.
+ *
+ * @param layoutId 액티비티의 layout id - Int
  */
-abstract class BaseActivity<VB : ViewBinding>(@LayoutRes private val layoutId: Int) :
-    AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding>(
+    @LayoutRes private val layoutId: Int
+) : AppCompatActivity() {
 
     protected lateinit var binding: VB
     abstract fun getViewBinding(@LayoutRes layoutId: Int): VB
